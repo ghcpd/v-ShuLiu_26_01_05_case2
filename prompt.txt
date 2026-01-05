@@ -18,7 +18,7 @@ Clearly specify what is intentionally “not now” / out of scope for this road
 Output format requirements:
 
 First, provide your analysis and overall explanation in natural language (you may structure it with sections).
-Then, assume you will create a new file named ROADMAP.md at the root of the repository. At the end of your answer, output the full Markdown content of this file so it can be saved directly as the roadmap document.
+Then, you should create a new file named ROADMAP.md at the root of the repository. At the end of your answer, output the full Markdown content of this file so it can be saved directly as the roadmap document.
 ROADMAP.md should include at least:
 Background and why a roadmap is needed now
 Phases / milestones (2–3) with goals
