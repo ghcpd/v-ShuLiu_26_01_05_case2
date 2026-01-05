@@ -1,0 +1,203 @@
+User: You are maintaining an open-source team knowledge base / documentation site.
+The site is already in active use, but as different contributors have added pages and features over time, the project has grown organically. The current information architecture, user experience, and collaboration patterns are somewhat messy and inconsistent.
+
+Based on the repository snapshot provided above (code, issues, milestones, and contribution-related docs), propose a concise, high-level roadmap and milestone structure for the next phase of this documentation site.
+
+Focus on making collaboration more structured and sustainable, rather than listing every possible feature idea.
+
+Your response should:
+
+Explain why a roadmap or milestones are needed at this stage of the project (for example: messy information architecture, conflicts from parallel edits, unclear long-term direction, etc.).
+Organize upcoming work into 2–3 phases or milestones, each with clear goals, such as:
+Content and information architecture cleanup
+Editing experience and collaboration workflow improvements
+Gradual introduction of advanced capabilities like search, tags, and permissions
+Describe how these phases / milestones will help contributors stay aligned and work in parallel without blocking each other (for example: who can focus on which layer, what can be done concurrently, what requires sequencing).
+Highlight key uncertainties, dependencies, or decision points that could affect or change the roadmap (for example: whether to support multi-tenancy, whether to switch the storage backend for documents, whether to adopt a new frontend framework).
+Clearly specify what is intentionally “not now” / out of scope for this roadmap, and briefly justify why (for example: too high maintenance cost, unclear dependencies, low impact for current users).
+Output format requirements:
+
+First, provide your analysis and overall explanation in natural language (you may structure it with sections).
+Then, you should create a new file named ROADMAP.md at the root of the repository. At the end of your answer, output the full Markdown content of this file so it can be saved directly as the roadmap document.
+ROADMAP.md should include at least:
+Background and why a roadmap is needed now
+Phases / milestones (2–3) with goals
+Collaboration and parallel work strategy
+Key uncertainties / decision points
+Out of scope / Not now list
+Use clear Markdown headings and lists to structure the document.
+Constraints:
+
+Assume limited time and a small contributor pool; do not assume unlimited resources.
+Treat this roadmap as a living, evolving working plan, not as a fixed or final commitment.
+Ground your plan in the specific context of this repository (current documentation structure, known pain points, issues raised, etc.), rather than giving generic advice that could apply to any project.
+
+GitHub Copilot: Proceeding to create a concise roadmap file (ROADMAP.md) at the repo root summarizing phases, decisions, and next steps.
+
+Created [](file:///c%3A/Users/v-shuliu1/test/0105-2/oswe-mini-prime-new/v-ShuLiu_26_01_05_case2/ROADMAP.md)
+
+Perfect! The roadmap file ROADMAP.md has been added with the three-phase plan and next steps; my next step is to ask whether you want me to open a PR for review or adjust any details based on priorities.## Analysis & plan
+
+### Why a roadmap is needed now
+- The repo shows signs of organic growth: inconsistent page structure, ad-hoc contributor patterns, and recurring issues (see contributing.md and issues_snapshot.md).
+- With a small contributor pool, we need a lightweight, time-boxed plan to reduce friction, limit merge conflicts, and make parallel work possible without heavy coordination.
+
+### Proposed high-level approach
+- Phase 1 (Audit & Stabilize): create a content inventory, add templates, and fix high-impact pages.
+- Phase 2 (Collaboration & Workflow): add PR/issue templates, CI checks, and editorial ownership.
+- Phase 3 (Discoverability & Lightweight Governance): add search, tags, basic analytics, and minimal role definitions.
+- Keep changes incremental, favor low-effort/high-impact work, and treat decisions as reversible experiments.
+
+### How this enables parallel work
+- Content audits and small cleanups can be distributed among volunteers by section.
+- Infrastructure work (CI, search) can be implemented concurrently by a small infra group.
+- Taxonomy decisions should be agreed before mass refactor steps; otherwise, work can run in parallel.
+
+### Key uncertainties
+- Whether to change site generator/framework (impacts plugins, search options).
+- Choice of search (hosted vs open-source).
+- Whether to introduce permissions/SSO or keep GitHub repo workflows.
+- Available contributor time and priorities.
+
+---
+
+## ROADMAP.md (created at repo root)
+
+Below is the full content that was added to ROADMAP.md. You can copy, review, or request edits — I can open a PR with this file if you’d like.
+
+---
+# ROADMAP: Documentation Site (high-level)
+
+## Background — why a roadmap is needed now
+
+The documentation site has grown organically and is actively used, but contributors have added pages and features unevenly. Symptoms: inconsistent information architecture, duplicated or orphaned pages, lack of clear ownership, and ad-hoc editing patterns (see contributing.md and issues_snapshot.md). With a small contributor pool and limited time, we need a concise, practical roadmap to reduce friction, enable parallel work, and make the repository easier to maintain.
+
+> **Goal:** Stabilize the documentation so contributors can work safely and independently, and then add lightweight discoverability and governance features.
+
+---
+
+## Principles
+
+- Keep changes incremental and low-cost.
+- Prioritize high-impact, low-effort work first (quick wins).
+- Make decisions explicit and reversible (consensus + small experiments).
+- Treat this roadmap as a living document and adapt based on outcomes.
+
+---
+
+## Phases / Milestones
+
+### Phase 1 — Audit & Stabilize (2–4 weeks) ✅
+Goals:
+- Perform a content inventory (which pages exist, what's duplicated, what’s outdated).
+- Establish a minimal taxonomy and simple front-matter metadata convention (title, section, owner, tags).
+- Create or update **content templates** and a short, actionable editing guide inside contributing.md.
+- Implement quick-win cleanup PRs for the top 5–10 high-traffic pages.
+
+Why this first: an agreed map and templates reduce friction and make later automation safer.
+
+Deliverables / Acceptance:
+- Content inventory spreadsheet or `docs/content-inventory.md` completed.
+- Templates added to `docs/templates/` and applied to a sample set of pages.
+- 5–10 high-impact cleanup PRs merged.
+
+### Phase 2 — Collaboration & Workflow Improvements (3–6 weeks) 🔧
+Goals:
+- Add PR and issue templates, clear **labels** and a lightweight review process (who approves what).
+- Introduce CI checks for docs (linkcheck, front-matter validator, simple linting).
+- Establish a small editorial ownership model and an onboarding checklist for new contributors.
+- Create short, focused contributor training (1–2 documents / a short video or walkthrough).
+
+Why this second: tooling and governance reduce recurring merge conflicts and improve quality with little ongoing overhead.
+
+Deliverables / Acceptance:
+- Templates and labels in `.github/`.
+- CI scheduled checks run successfully in PRs.
+- Documented editorial owners and a triage schedule.
+
+### Phase 3 — Discoverability & Lightweight Governance (4–8 weeks) 🔎
+Goals:
+- Add search and tagging (e.g., Algolia, Lunr, or built-in static search) and standardize tags in metadata.
+- Implement minimal analytics and a feedback mechanism for readers.
+- If needed, introduce a lightweight permission model (maintainers / editors) and documented escalation paths.
+
+Why this later: search and governance are higher-impact once content is organized and workflows are stable.
+
+Deliverables / Acceptance:
+- Search index built and validated for key pages.
+- Tags applied to a majority of active pages.
+- Simple analytics dashboard and a feedback flow for content issues.
+
+---
+
+## How this helps contributors work in parallel
+
+- Content work (Phase 1) can be split by section owners; multiple volunteers can run audits and small fixes concurrently.
+- Developer/Infra work (Phase 2 and 3) — CI, PR templates, and search setup — can be implemented in parallel with content cleanup because they are orthogonal.
+- Sequencing: agree on taxonomy/metadata before large-scale renames or tag application; CI and PR tooling may be rolled out earlier and enforced gradually (soft-enforced at first).
+- Small working groups (2–4 people) limit coordination overhead and enable fast decision cycles.
+
+---
+
+## Key uncertainties & decision points
+
+- Site generator / UI: Keep the current static markdown approach, or adopt a framework (MkDocs, Docusaurus) — this affects search and plugin options.
+- Search provider: hosted (Algolia) vs self-hosted (Lunr) vs native GitHub Pages solutions (cost and maintenance tradeoffs).
+- Permissions & hosting: whether to introduce access controls (SSO, RBAC) or keep repo-centric GitHub workflows.
+- Scale & multi-tenancy: whether we need to support separate product docs or multi-tenant docs (adds complexity).
+- Contributor availability and priorities — timelines assume limited part-time contributors.
+
+Plan to resolve these via small experiments and a decision checklist prepared during Phase 1.
+
+---
+
+## Out of scope / Not now
+
+- Full visual redesign of the site (too costly and disruptive).
+- Replacing the repo with a proprietary CMS or a heavy migration.
+- Multi-tenancy, SSO, or complex RBAC systems (high cost and unclear benefits for current user base).
+- Large paid search solutions until we validate value from lightweight search.
+
+Rationale: These items either require significant engineering effort or introduce ongoing costs that are not justified at this stage.
+
+---
+
+## Quick wins and suggested metrics (to track progress)
+
+Quick wins:
+- Add templates and a short editing guide (Phase 1).
+- Add a link-checking CI job (Phase 2).
+- Fix top 5 pages for clarity and canonical links (Phase 1).
+
+Suggested metrics:
+- Template adoption rate (percentage of new PRs using templates).
+- Number of duplicate/orphan pages removed.
+- PR review time for docs (target: <48 hours for small edits).
+- Search coverage and average result relevance score (once search is implemented).
+
+---
+
+## Next steps (first 30 days)
+
+1. Convene a **working group (3–5 people)**: one infra/engineer, one editor/maintainer, one or two content volunteers.
+2. Run a 2-week content audit (Phase 1 kickoff): generate `docs/content-inventory.md` and propose taxonomy choices.
+3. Create templates and submit the first cleanup PRs.
+4. Add one CI job (linkcheck) to catch regressions early.
+
+---
+
+> **Note:** This roadmap is intentionally prescriptive but lightweight—prioritize consensus on a few decisions, iterate quickly, and revisit after each milestone.
+
+---
+
+*Document created as a living plan. Update this file as decisions are made and milestones complete.*
+
+---
+
+If you'd like, I can:
+- Open a PR for ROADMAP.md with a short description, or
+- Propose the initial working group and draft the 2-week Phase 1 checklist to start the content audit.
+
+Would you like me to open a PR now or adjust any items before that? ✅
+
+Made changes.
