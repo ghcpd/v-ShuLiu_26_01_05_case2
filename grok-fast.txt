@@ -1,0 +1,146 @@
+User: You are maintaining an open-source team knowledge base / documentation site.
+The site is already in active use, but as different contributors have added pages and features over time, the project has grown organically. The current information architecture, user experience, and collaboration patterns are somewhat messy and inconsistent.
+
+Based on the repository snapshot provided above (code, issues, milestones, and contribution-related docs), propose a concise, high-level roadmap and milestone structure for the next phase of this documentation site.
+
+Focus on making collaboration more structured and sustainable, rather than listing every possible feature idea.
+
+Your response should:
+
+Explain why a roadmap or milestones are needed at this stage of the project (for example: messy information architecture, conflicts from parallel edits, unclear long-term direction, etc.).
+Organize upcoming work into 2–3 phases or milestones, each with clear goals, such as:
+Content and information architecture cleanup
+Editing experience and collaboration workflow improvements
+Gradual introduction of advanced capabilities like search, tags, and permissions
+Describe how these phases / milestones will help contributors stay aligned and work in parallel without blocking each other (for example: who can focus on which layer, what can be done concurrently, what requires sequencing).
+Highlight key uncertainties, dependencies, or decision points that could affect or change the roadmap (for example: whether to support multi-tenancy, whether to switch the storage backend for documents, whether to adopt a new frontend framework).
+Clearly specify what is intentionally “not now” / out of scope for this roadmap, and briefly justify why (for example: too high maintenance cost, unclear dependencies, low impact for current users).
+Output format requirements:
+
+First, provide your analysis and overall explanation in natural language (you may structure it with sections).
+Then, you should create a new file named ROADMAP.md at the root of the repository. At the end of your answer, output the full Markdown content of this file so it can be saved directly as the roadmap document.
+ROADMAP.md should include at least:
+Background and why a roadmap is needed now
+Phases / milestones (2–3) with goals
+Collaboration and parallel work strategy
+Key uncertainties / decision points
+Out of scope / Not now list
+Use clear Markdown headings and lists to structure the document.
+Constraints:
+
+Assume limited time and a small contributor pool; do not assume unlimited resources.
+Treat this roadmap as a living, evolving working plan, not as a fixed or final commitment.
+Ground your plan in the specific context of this repository (current documentation structure, known pain points, issues raised, etc.), rather than giving generic advice that could apply to any project.
+
+GitHub Copilot: Read [](file:///c%3A/Users/v-shuliu1/test/0105-2/grok-fast/v-ShuLiu_26_01_05_case2/README.md)
+
+Read [](file:///c%3A/Users/v-shuliu1/test/0105-2/grok-fast/v-ShuLiu_26_01_05_case2/docs/contributing.md)
+
+Read [](file:///c%3A/Users/v-shuliu1/test/0105-2/grok-fast/v-ShuLiu_26_01_05_case2/docs/issues_snapshot.md)
+
+Read [](file:///c%3A/Users/v-shuliu1/test/0105-2/grok-fast/v-ShuLiu_26_01_05_case2/app/main.py)
+
+Read [](file:///c%3A/Users/v-shuliu1/test/0105-2/grok-fast/v-ShuLiu_26_01_05_case2/app/models.py#1-1), lines 1 to 50
+
+Read [](file:///c%3A/Users/v-shuliu1/test/0105-2/grok-fast/v-ShuLiu_26_01_05_case2/app/repositories.py#1-1), lines 1 to 50
+
+Read [](file:///c%3A/Users/v-shuliu1/test/0105-2/grok-fast/v-ShuLiu_26_01_05_case2/app/repositories.py#51-51), lines 51 to 60
+
+Read [](file:///c%3A/Users/v-shuliu1/test/0105-2/grok-fast/v-ShuLiu_26_01_05_case2/app/services.py)
+
+Read [](file:///c%3A/Users/v-shuliu1/test/0105-2/grok-fast/v-ShuLiu_26_01_05_case2/app/api/users.py)
+
+Read [](file:///c%3A/Users/v-shuliu1/test/0105-2/grok-fast/v-ShuLiu_26_01_05_case2/app/api/notifications.py#1-1), lines 1 to 50
+
+Read [](file:///c%3A/Users/v-shuliu1/test/0105-2/grok-fast/v-ShuLiu_26_01_05_case2/app/api/notifications.py#51-51), lines 51 to 61
+
+Created [](file:///c%3A/Users/v-shuliu1/test/0105-2/grok-fast/v-ShuLiu_26_01_05_case2/ROADMAP.md)
+
+Read [](file:///c%3A/Users/v-shuliu1/test/0105-2/grok-fast/v-ShuLiu_26_01_05_case2/ROADMAP.md#1-1), lines 1 to 10
+
+## Analysis and Overall Explanation
+
+### Why a Roadmap is Needed Now
+This team knowledge base/documentation site, built as a FastAPI backend service, has grown organically from a simple reminder tool to a multi-contributor project. The current state shows clear signs of unstructured development: mixed API patterns (some endpoints use Pydantic models with proper error responses, others return raw dicts), inconsistent error handling (HTTP status codes and response formats vary), and hybrid storage approaches (in-memory dicts alongside database assumptions). Issues highlight pain points like unclear module ownership, lack of background processing for scheduled tasks, and minimal observability. Without a roadmap, contributors risk continued conflicts from parallel edits, unclear priorities, and unsustainable technical debt that could make the system unmaintainable as usage grows.
+
+### Proposed Roadmap Structure
+I've organized the work into three phases focusing on structured collaboration rather than exhaustive feature lists:
+
+1. **Foundation and Consistency**: Prioritize cleaning up the existing codebase to establish reliable patterns for future work.
+2. **Core Functionality Enhancement**: Address operational gaps that enable reliable scaling and maintenance.
+3. **Advanced Capabilities**: Introduce sophisticated features once the foundation is solid.
+
+### Collaboration Strategy
+The layered architecture (API, services, repositories) allows parallel work: API standardization can happen concurrently with service improvements, while data layer work can proceed with feature flags. Sequencing is needed for database changes and API consistency to avoid rework.
+
+### Key Considerations
+Uncertainties around database choice and task queue technology could shift timelines. Advanced features like multi-tenancy are out of scope initially due to complexity and current user needs.
+
+### Constraints Acknowledged
+This roadmap assumes limited contributors and time, focusing on high-impact, achievable improvements rather than ambitious overhauls. It's designed as a living plan that can adapt based on real-world feedback.
+
+## ROADMAP.md Content
+
+```
+# Roadmap for Team Knowledge Base / Documentation Site
+
+## Background and Why a Roadmap is Needed Now
+
+This documentation site (implemented as a FastAPI-based backend service) has evolved organically from a simple internal tool to a system supporting multiple teams. While functional, the codebase exhibits signs of unstructured growth: inconsistent API response formats, mixed storage strategies (in-memory vs. database assumptions), lack of background processing for scheduled tasks, and minimal observability. Issues like parallel edits causing conflicts, unclear module ownership, and scattered TODOs indicate that without structured planning, future contributions will continue to exacerbate these problems. A roadmap is essential now to align contributors, prioritize high-impact improvements, and establish sustainable collaboration patterns before the system becomes too complex to refactor.
+
+## Phases / Milestones
+
+### Phase 1: Foundation and Consistency (2-3 months)
+**Goals:**
+- Standardize API response formats and error handling across all endpoints
+- Complete the data access layer migration from in-memory to a consistent database approach
+- Establish clear module ownership and code organization principles
+- Implement basic logging and error tracking
+
+This phase focuses on cleaning up the existing codebase to make it more maintainable and predictable for contributors.
+
+### Phase 2: Core Functionality Enhancement (3-4 months)
+**Goals:**
+- Introduce background worker support for scheduled reminders/notifications
+- Add comprehensive observability (metrics, traces, health checks)
+- Improve testing coverage and CI/CD processes
+- Document API versioning strategy and migration path
+
+This phase addresses the core operational gaps that prevent reliable scaling and maintenance.
+
+### Phase 3: Advanced Capabilities (4-6 months)
+**Goals:**
+- Implement advanced features like audit logs, user permissions, and search capabilities
+- Optimize performance and add caching layers
+- Enhance collaboration tools (better PR templates, automated code reviews)
+- Plan for multi-tenant support if user demand grows
+
+This phase introduces sophisticated features while maintaining the improved foundation.
+
+## Collaboration and Parallel Work Strategy
+
+Contributors can work in parallel across different layers without blocking each other:
+- **API Layer:** Frontend/backend developers can standardize endpoints independently, as long as they follow agreed-upon response models
+- **Services Layer:** Business logic improvements can proceed concurrently with API work, using mock data for testing
+- **Data Layer:** Database migration and repository refactoring can happen alongside other work, with feature flags to toggle implementations
+- **Infrastructure:** Observability and background worker setup can be developed in parallel with application features
+
+Sequencing is required for: database schema changes (must happen before dependent features), and API standardization (should precede advanced features to avoid rework).
+
+## Key Uncertainties / Decision Points
+
+- **Database Choice:** Whether to commit to PostgreSQL, SQLite for simplicity, or keep it abstracted for future flexibility. This affects migration complexity and performance.
+- **Task Queue Strategy:** Celery vs. simpler cron-based approaches vs. cloud-native solutions. Depends on deployment environment and scaling needs.
+- **API Versioning:** Whether to implement semantic versioning now or defer until breaking changes are imminent. Affects client compatibility.
+- **Multi-Tenancy Timeline:** Whether to prioritize this for enterprise users or keep single-tenant for now. Depends on user feedback and business requirements.
+
+## Out of Scope / Not Now
+
+- **Full Multi-Tenancy Support:** Too complex for current user base and would require significant architectural changes. Low impact for existing users.
+- **Advanced Search and Tagging:** Can be built on top of the improved foundation later; not critical for current collaboration needs.
+- **Mobile App Development:** Focus on web/API improvements first; mobile can follow once core issues are resolved.
+- **Integration with External Tools:** (e.g., Slack advanced features, email providers) - defer until basic notification reliability is proven.
+- **Performance Optimization for High Scale:** Current usage doesn't warrant this yet; focus on correctness and maintainability first.
+```
+
+Made changes.
